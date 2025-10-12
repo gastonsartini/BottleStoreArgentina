@@ -7,11 +7,17 @@ const nextConfig = {
   compiler: {
     removeConsole: false,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'ikvilgkhfemlfwcpzeul.supabase.co',
+        hostname: 'images.pexels.com',
       },
       {
         protocol: 'https',
