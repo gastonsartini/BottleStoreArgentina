@@ -20,6 +20,7 @@ export default function CheckoutPage() {
     name: '',
     email: '',
     phone: '',
+    identification: '',
   });
 
   const [shippingData, setShippingData] = useState({
@@ -59,7 +60,7 @@ export default function CheckoutPage() {
 
   const handleCustomerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!customerData.name || !customerData.email || !customerData.phone) {
+    if (!customerData.name || !customerData.email || !customerData.phone || !customerData.identification) {
       setError('Por favor completa todos los campos');
       return;
     }
@@ -96,6 +97,7 @@ export default function CheckoutPage() {
         customer_name: customerData.name,
         customer_email: customerData.email,
         customer_phone: customerData.phone,
+        customer_identification: customerData.identification,
         items: items.map((item) => ({
           product_id: item.product.id,
           product_name: item.product.name,
@@ -251,7 +253,21 @@ export default function CheckoutPage() {
                         value={customerData.phone}
                         onChange={(e) => setCustomerData({ ...customerData, phone: e.target.value })}
                         className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                        placeholder="11 1234-5678"
+                        placeholder="1123456789"
+                        required
+                      />
+                      <p className="text-xs text-gray-500 mt-1">Sin espacios ni guiones (ej: 1123456789)</p>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        DNI
+                      </label>
+                      <input
+                        type="text"
+                        value={customerData.identification}
+                        onChange={(e) => setCustomerData({ ...customerData, identification: e.target.value })}
+                        className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        placeholder="12345678"
                         required
                       />
                     </div>

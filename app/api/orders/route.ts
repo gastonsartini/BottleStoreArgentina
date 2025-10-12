@@ -91,28 +91,41 @@ export async function POST(request: Request) {
 
       console.log('MercadoPago items:', JSON.stringify(mpItems, null, 2));
 
+      // Parse phone number (expecting format like "1123456789")
+      const phoneNumber = orderData.customer_phone.replace(/\D/g, '');
+      const areaCode = phoneNumber.substring(0, 2) || '11';
+      const phoneWithoutArea = phoneNumber.substring(2) || phoneNumber;
+
+      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://bottlestore.netlify.app';
+
       const preference = {
         items: mpItems,
         payer: {
           name: orderData.customer_name,
+          surname: orderData.customer_name.split(' ').slice(1).join(' ') || orderData.customer_name,
           email: orderData.customer_email,
           phone: {
-            number: orderData.customer_phone,
+            area_code: areaCode,
+            number: phoneWithoutArea,
+          },
+          identification: {
+            type: 'DNI',
+            number: orderData.customer_identification,
           },
           address: {
             street_name: orderData.shipping_address.street,
-            city: orderData.shipping_address.city,
-            state: orderData.shipping_address.state,
+            street_number: 1,
             zip_code: orderData.shipping_address.postalCode,
           },
         },
         back_urls: {
-          success: `${supabaseUrl}/orden/${data.id}`,
-          failure: `${supabaseUrl}/checkout?error=payment_failed`,
-          pending: `${supabaseUrl}/orden/${data.id}`,
+          success: `${siteUrl}/orden/${data.id}`,
+          failure: `${siteUrl}/checkout?error=payment_failed`,
+          pending: `${siteUrl}/orden/${data.id}`,
         },
         auto_return: "approved",
         external_reference: data.id,
+        notification_url: `${supabaseUrl}/functions/v1/mercadopago-webhook`,
       };
 
       console.log('Preference payload:', JSON.stringify(preference, null, 2));
