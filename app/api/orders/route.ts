@@ -99,6 +99,12 @@ export async function POST(request: Request) {
           phone: {
             number: orderData.customer_phone,
           },
+          address: {
+            street_name: orderData.shipping_address.street,
+            city: orderData.shipping_address.city,
+            state: orderData.shipping_address.state,
+            zip_code: orderData.shipping_address.postalCode,
+          },
         },
         back_urls: {
           success: `${supabaseUrl}/orden/${data.id}`,

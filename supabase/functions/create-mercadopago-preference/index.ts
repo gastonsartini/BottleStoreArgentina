@@ -19,6 +19,12 @@ interface PreferenceRequest {
     name: string;
     email: string;
     phone: string;
+    address: {
+      street_name: string;
+      city: string;
+      state: string;
+      zip_code: string;
+    };
   };
   shipment: {
     cost: number;
@@ -69,6 +75,12 @@ Deno.serve(async (req: Request) => {
         email: body.payer.email,
         phone: {
           number: body.payer.phone,
+        },
+        address: {
+          street_name: body.payer.address.street_name,
+          city: body.payer.address.city,
+          state: body.payer.address.state,
+          zip_code: body.payer.address.zip_code,
         },
       },
       back_urls: {
