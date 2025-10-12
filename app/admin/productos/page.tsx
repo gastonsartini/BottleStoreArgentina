@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import { Plus, CreditCard as Edit, Trash2, Eye, EyeOff } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export default function ProductsAdminPage() {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);

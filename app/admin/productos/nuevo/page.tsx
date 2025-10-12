@@ -6,6 +6,8 @@ import { createClient } from '@/lib/supabase/client';
 import { ArrowLeft, Save, Plus, X } from 'lucide-react';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+
 export default function NewProductPage() {
   const router = useRouter();
   const supabase = createClient();

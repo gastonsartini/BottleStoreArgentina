@@ -1,9 +1,36 @@
 import { MetadataRoute } from 'next';
 import { createUnauthenticatedClient } from '@/lib/supabase/server';
 
+export const dynamic = 'force-dynamic';
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const supabase = createUnauthenticatedClient();
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://bottlestore.netlify.app';
+
+  // Only fetch from database if env vars are available
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    return [
+      {
+        url: baseUrl,
+        lastModified: new Date(),
+        changeFrequency: 'daily',
+        priority: 1,
+      },
+      {
+        url: `${baseUrl}/productos`,
+        lastModified: new Date(),
+        changeFrequency: 'daily',
+        priority: 0.9,
+      },
+      {
+        url: `${baseUrl}/ofertas`,
+        lastModified: new Date(),
+        changeFrequency: 'daily',
+        priority: 0.8,
+      },
+    ];
+  }
+
+  const supabase = createUnauthenticatedClient();
 
   const { data: products } = await supabase
     .from('products')

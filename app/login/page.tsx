@@ -6,6 +6,8 @@ import { createClient } from '@/lib/supabase/client';
 import { LogIn } from 'lucide-react';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

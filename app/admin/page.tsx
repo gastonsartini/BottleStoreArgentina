@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { Package, ShoppingCart, Tag, TrendingUp } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export default function AdminDashboard() {
   const supabase = createClient();
   const [stats, setStats] = useState({

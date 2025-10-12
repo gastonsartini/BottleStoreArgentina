@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { Store, CreditCard, Truck, Save } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 interface StoreSettings {
   id: string;
   store_name: string;

@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { Package, DollarSign, Calendar, User } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export default function OrdersAdminPage() {
   const supabase = createClient();
   const [orders, setOrders] = useState<any[]>([]);

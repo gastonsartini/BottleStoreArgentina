@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { Plus, CreditCard as Edit, Trash2 } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export default function CategoriesAdminPage() {
   const supabase = createClient();
   const [categories, setCategories] = useState<any[]>([]);
