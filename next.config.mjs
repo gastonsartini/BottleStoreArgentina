@@ -18,11 +18,6 @@ const nextConfig = {
   },
   experimental: {
     optimizePackageImports: ['lucide-react'],
-    forceSwcTransforms: false,
-  },
-  webpack: (config) => {
-    config.externals = [...(config.externals || []), { '@next/swc-linux-x64-gnu': 'commonjs @next/swc-linux-x64-gnu' }];
-    return config;
   },
 };
 
