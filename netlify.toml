@@ -1,12 +1,9 @@
 [build]
-  command = "npm ci && npm run build"
+  command = "npm install && npm run build"
   publish = ".next"
 
-# [[plugins]]
-#   package = "@netlify/plugin-nextjs"
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 [build.environment]
-  # pedir una versión de Node que incluya npm 9.x (más estable)
-  NODE_VERSION = "18.16.0"
-  # elimina NPM_FLAGS problemáticos o deja vacío si no lo necesitas
-  NPM_FLAGS = ""
+  NODE_VERSION = "18"

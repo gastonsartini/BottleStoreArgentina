@@ -187,11 +187,6 @@ Para soporte y consultas:
 
 ## 🔄 Changelog
 
-### v1.0.1
-- Optimización de dependencias para Netlify
-- Configuración mejorada de build
-- Limpieza de dependencias innecesarias
-
 ### v1.0.0
 - Lanzamiento inicial
 - Sistema completo de e-commerce
