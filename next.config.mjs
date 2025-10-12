@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   swcMinify: false,
+  experimental: {
+    esmExternals: false,
+  },
   compiler: {
     removeConsole: false,
   },
@@ -15,9 +18,6 @@ const nextConfig = {
         hostname: '**.pexels.com',
       },
     ],
-  },
-  experimental: {
-    optimizePackageImports: ['lucide-react'],
   },
 };
 
