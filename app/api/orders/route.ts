@@ -97,16 +97,19 @@ export async function POST(request: Request) {
           name: orderData.customer_name,
           email: orderData.customer_email,
           phone: {
-            number: orderData.customer_phone,
+            area_code: orderData.customer_phone.substring(0, 2) || "11",
+            number: orderData.customer_phone.replace(/\D/g, ''),
           },
         },
         back_urls: {
-          success: `${supabaseUrl}/orden/${data.id}`,
-          failure: `${supabaseUrl}/checkout?error=payment_failed`,
-          pending: `${supabaseUrl}/orden/${data.id}`,
+          success: `${request.headers.get('origin') || process.env.NEXT_PUBLIC_SITE_URL || 'https://bottlestore.netlify.app'}/orden/${data.id}`,
+          failure: `${request.headers.get('origin') || process.env.NEXT_PUBLIC_SITE_URL || 'https://bottlestore.netlify.app'}/checkout?error=payment_failed`,
+          pending: `${request.headers.get('origin') || process.env.NEXT_PUBLIC_SITE_URL || 'https://bottlestore.netlify.app'}/orden/${data.id}`,
         },
         auto_return: "approved",
-        external_reference: data.id,
+        external_reference: data.id.toString(),
+        notification_url: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/mercadopago-webhook`,
+        statement_descriptor: "BOTTLE STORE",
       };
 
       console.log('Preference payload:', JSON.stringify(preference, null, 2));
